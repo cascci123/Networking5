@@ -88,7 +88,8 @@ def get_route(hostname):
 
             #Fill in start
             # Make a raw socket named mySocket
-            mySocket = socket(AF_INET, SOCK_RAW, getprotobyname("icmp"))
+            icmp = getprotobyname("icmp")
+            mySocket = socket(AF_INET, SOCK_RAW, icmp)
             #Fill in end
 
 
@@ -172,3 +173,7 @@ def get_route(hostname):
             finally:
                 return tracelist2
                 mySocket.close()
+
+
+if __name__ == '__main__':
+    get_route('google.com')

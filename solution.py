@@ -130,7 +130,7 @@ def get_route(hostname):
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
-                    destAddr = gethostbyname(hostname)
+                    destAddr = gethostbyaddress(hostname)
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
@@ -167,4 +167,5 @@ def get_route(hostname):
                     #Fill in end
                 break
             finally:
+                return tracelist2
                 mySocket.close()

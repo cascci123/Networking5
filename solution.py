@@ -108,8 +108,6 @@ def get_route(hostname):
 
             except timeout:
                 continue
-
-
             else:
                 icmp_h = recvPacket[20:28]
                 types, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmp_h)
@@ -150,5 +148,5 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
-if __name__ == '__main__':
-   get_route("google.com")
+#if __name__ == '__main__':
+ #  get_route("google.com")

@@ -83,7 +83,7 @@ def get_route(hostname):
 
     for ttl in range(1,MAX_HOPS):
         for tries in range(TRIES):
-            #destAddr = gethostbyname(hostname)
+            destAddr = gethostbyname(hostname)
 
 
             #Fill in start
@@ -130,11 +130,11 @@ def get_route(hostname):
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
-                    destAddr = gethostbyaddress(hostname)
+                    host_add = gethostbyaddress(hostname)
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
-                    destAddr = "hostname not returnable"
+                    host_add = "hostname not returnable"
                     #Fill in end
 
 
@@ -144,20 +144,20 @@ def get_route(hostname):
                     bytes])[0]
                     #Fill in start
                     #You should add your responses to your lists here
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], destAddr))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_add))
                     #Fill in end
                 elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], destAddr))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_add))
                     #You should add your responses to your lists here 
                     #Fill in end
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     #Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], destAddr))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_add))
                     #You should add your responses to your lists here and return your list if your destination IP is met
                     #Fill in end
                 else:

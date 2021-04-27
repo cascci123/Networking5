@@ -105,6 +105,8 @@ def get_route(hostname):
                     tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     tracelist2.append(tracelist1)
+                    tracelist1.clear()
+
 
                     #You should add the list above to your all traces list
                     #Fill in end
@@ -115,6 +117,7 @@ def get_route(hostname):
                     tracelist1.append("* * * Request timed out.")
                     #Fill in start
                     tracelist2.append(tracelist1)
+                    tracelist1.clear()
 
                     #You should add the list above to your all traces list
                     #Fill in end

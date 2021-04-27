@@ -119,15 +119,15 @@ def get_route(hostname):
                 if types == 11:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
                 elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name[0]))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name[0]))
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     return tracelist2
 
@@ -140,5 +140,4 @@ def get_route(hostname):
             finally:
                 mySocket.close()
 
-#if __name__ == '__main__':
-    #get_route("www.google.com")
+get_route("www.google.com")

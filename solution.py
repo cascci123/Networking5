@@ -108,8 +108,6 @@ def get_route(hostname):
 
             except timeout:
                 continue
-
-
             else:
                 icmp_h = recvPacket[20:28]
                 types, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmp_h)
@@ -120,26 +118,17 @@ def get_route(hostname):
 
                 if types == 11:
                     bytes = struct.calcsize("d")
-                    timeSent = struct.unpack("d", recvPacket[28:28 +
-                                                                bytes])[0]
-                    # Fill in start
-                    # You should add your responses to your lists here
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
-                    # Fill in end
+                    timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
+                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
                 elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    # Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
-                    # You should add your responses to your lists here
-                    # Fill in end
+                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name[0]))
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    # Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name[0]))
+                    tracelist2.append(" %d %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name[0]))
                     # You should add your responses to your lists here and return your list if your destination IP is met
-                    # Fill in end
                     return tracelist2
 
                 else:
@@ -152,4 +141,4 @@ def get_route(hostname):
                 mySocket.close()
 
 #if __name__ == '__main__':
- #  get_route("google.com")
+    #get_route("www.google.com")

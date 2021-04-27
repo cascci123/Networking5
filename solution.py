@@ -164,6 +164,8 @@ def get_route(hostname):
                     tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_add))
                     #You should add your responses to your lists here and return your list if your destination IP is met
                     #Fill in end
+                    return tracelist2
+
                 else:
                     #Fill in start
                     tracelist2.append("Error.")
@@ -171,9 +173,8 @@ def get_route(hostname):
                     #Fill in end
                 break
             finally:
-                return tracelist2
                 mySocket.close()
 
 
 #if __name__ == '__main__':
-   # get_route("google.com")
+ #   get_route("google.com")

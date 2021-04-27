@@ -165,7 +165,7 @@ def get_route(hostname):
                     #Fill in end
                 else:
                     #Fill in start
-                    tracelist1.append("Error.")
+                    tracelist2.append("Error.")
                     #If there is an exception/error to your if statements, you should append that to your list here
                     #Fill in end
                 break

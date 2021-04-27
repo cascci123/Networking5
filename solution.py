@@ -134,7 +134,7 @@ def get_route(hostname):
                 #Fill in end
                 try: #try to fetch the hostname
                     #Fill in start
-                    host_add = socket.gethostbyaddress(destAddr)
+                    host_add = gethostbyaddr(destAddr)
                     #Fill in end
                 except herror:   #if the host does not provide a hostname
                     #Fill in start
@@ -176,5 +176,5 @@ def get_route(hostname):
                 mySocket.close()
 
 
-#if __name__ == '__main__':
- #   get_route("google.com")
+if __name__ == '__main__':
+    get_route("google.com")

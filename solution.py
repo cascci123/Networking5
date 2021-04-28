@@ -58,12 +58,10 @@ def build_packet():
     # Fill in end
     if sys.platform == 'darwin':
         check_sum = socket.htons(check_sum) & 0xffff
-        # Convert 16-bit integers from host to network byte order.
     else:
         check_sum = htons(check_sum)
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, check_sum, h_id, 1)
 
-    # So the function ending should look like this
 
     packet = header + data
     return packet
@@ -144,7 +142,7 @@ def get_route(hostname):
                     tracelist2.append("Error.")
                     # If there is an exception/error to your if statements, you should append that to your list here
                     # Fill in end
-                break
+                    break
             finally:
                 mySocket.close()
 

@@ -110,7 +110,7 @@ def get_route(hostname):
                 continue
             else:
                 icmp_h = recvPacket[20:28]
-                types, code, checksum, packetID, sequence = struct.unpack("bbHHh", icmp_h)
+                types, code, check_sum, packetID, sequence = struct.unpack("bbHHh", icmp_h)
                 try:
                     host_name = gethostbyaddr(destAddr)
                 except herror:
@@ -118,24 +118,23 @@ def get_route(hostname):
 
                 if types == 11:
                     bytes = struct.calcsize("d")
-                    timeSent = struct.unpack("d", recvPacket[28:28 +
-                                                                bytes])[0]
+                    timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
                     # You should add your responses to your lists here
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, destAddr[0], host_name))
                     # Fill in end
                 elif types == 3:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, destAddr[0], host_name))
                     # You should add your responses to your lists here
                     # Fill in end
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     # Fill in start
-                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name))
+                    tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, destAddr[0], host_name))
                     # You should add your responses to your lists here and return your list if your destination IP is met
                     # Fill in end
                     return tracelist2
@@ -148,5 +147,6 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
+
 #if __name__ == '__main__':
- #  get_route("google.com")
+   # get_route("google.com")

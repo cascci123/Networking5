@@ -54,8 +54,7 @@ def build_packet():
     header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, check_sum, h_id, 1)
     data = struct.pack("d", time.time())
     check_sum = checksum(header + data)
-    # Don’t send the packet yet , just return the final packet in this function.
-    # Fill in end
+
     if sys.platform == 'darwin':
         check_sum = socket.htons(check_sum) & 0xffff
     else:
@@ -76,11 +75,8 @@ def get_route(hostname):
         for tries in range(TRIES):
             destAddr = gethostbyname(hostname)
 
-            # Fill in start
-            # Make a raw socket named mySocket
             icmp = getprotobyname("icmp")
             mySocket = socket(AF_INET, SOCK_RAW, icmp)
-            # Fill in end
 
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
             mySocket.settimeout(TIMEOUT)
@@ -117,10 +113,8 @@ def get_route(hostname):
                 if types == 11:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
-                    # Fill in start
-                    # You should add your responses to your lists here
                     str_ttl = str(ttl)
-                    str_rtt = str((timeReceived - t) * 1000)
+                    str_rtt = str(round((timeReceived - t) * 1000)) + "ms"
                     str_ipAdd = str(addr[0])
                     obj = [str_ttl, str_rtt, str_ipAdd, host_name]
                     tracelist2.append(obj)
@@ -128,31 +122,22 @@ def get_route(hostname):
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     str_ttl = str(ttl)
-                    str_rtt = str((timeReceived - t) * 1000)
+                    str_rtt = str(round((timeReceived - t) * 1000)) + "ms"
                     str_ipAdd = str(addr[0])
                     obj = [str_ttl, str_rtt, str_ipAdd, host_name]
                     tracelist2.append(obj)
-                    #tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - t) * 1000, addr[0], host_name))
-                    # You should add your responses to your lists here
-                    # Fill in end
                 elif types == 0:
                     bytes = struct.calcsize("d")
                     timeSent = struct.unpack("d", recvPacket[28:28 + bytes])[0]
                     str_ttl = str(ttl)
-                    str_rtt = str((timeReceived - timeSent) * 1000)
+                    str_rtt = str(round((timeReceived - timeSent) * 1000)) + "ms"
                     str_ipAdd = str(addr[0])
                     obj = [str_ttl, str_rtt, str_ipAdd, host_name]
                     tracelist2.append(obj)
-                    #tracelist2.append(" %s %.0f ms %s %s" % (ttl, (timeReceived - timeSent) * 1000, addr[0], host_name))
-                    # You should add your responses to your lists here and return your list if your destination IP is met
-                    # Fill in end
                     return tracelist2
 
                 else:
-                    # Fill in start
                     tracelist2.append("Error.")
-                    # If there is an exception/error to your if statements, you should append that to your list here
-                    # Fill in end
                 break
             finally:
                 mySocket.close()
